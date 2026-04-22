@@ -1,10 +1,23 @@
 const assert = require('assert');
 
 function countBatteriesByHealth(presentCapacities) {
+  let healthy = 0, exchange = 0, failed = 0;
+
+  for (let i = 0; i < presentCapacities.length; i++) {
+    let batteryHealth = (100 * presentCapacities[i]) / 120;
+
+    if (batteryHealth >= 83) {
+      healthy++;
+    } else if (batteryHealth >= 63 && batteryHealth < 83) {
+      exchange++;
+    } else {
+      failed++;
+    }
+  }
   return {
-    healthy: 0,
-    exchange: 0,
-    failed: 0
+    healthy,
+    exchange,
+    failed
   };
 }
 
